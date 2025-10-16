@@ -1,13 +1,13 @@
 {
   "name": "@cometix/ccline-linux-x64-musl",
   "version": "0.0.0",
-  "description": "Linux x64 static binary for CCometixLine (musl libc)",
+  "description": "Linux x64 static binary for CubenceLine (musl libc)",
   "files": ["ccline"],
   "os": ["linux"],
   "cpu": ["x64"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Haleclipse/CCometixLine"
+    "url": "https://github.com/Haleclipse/CubenceLine"
   },
   "author": "Haleclipse",
   "license": "MIT"

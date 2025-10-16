@@ -51,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment-independent mock data generation for all segment types
 - Dynamic version display using `env!("CARGO_PKG_VERSION")`
 - Optimized preview rendering without file system calls or Git operations
-- Consistent cross-platform display: "Sonnet 4 | CCometixLine | main ✓ | 78.2% · 156.4k"
+- Consistent cross-platform display: "Sonnet 4 | CubenceLine | main ✓ | 78.2% · 156.4k"
 
 ## [1.0.2] - 2025-08-17
 
@@ -168,7 +168,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-08-11
 
 ### Added
-- Initial release of CCometixLine
+- Initial release of CubenceLine
 - High-performance Rust-based statusline tool for Claude Code
 - Git integration with branch, status, and tracking info
 - Model display with simplified Claude model names

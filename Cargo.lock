@@ -159,25 +159,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ccometixline"
-version = "1.0.8"
-dependencies = [
- "ansi-to-tui",
- "ansi_term",
- "chrono",
- "clap",
- "crossterm",
- "dirs",
- "ratatui",
- "regex",
- "semver",
- "serde",
- "serde_json",
- "toml",
- "ureq",
-]
-
-[[package]]
 name = "cfg-if"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -296,6 +277,25 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "acdd7c62a3665c7f6830a51635d9ac9b23ed385797f70a83bb8bafe9c572ab2b"
 dependencies = [
  "winapi",
+]
+
+[[package]]
+name = "cubenceline"
+version = "1.0.8"
+dependencies = [
+ "ansi-to-tui",
+ "ansi_term",
+ "chrono",
+ "clap",
+ "crossterm",
+ "dirs",
+ "ratatui",
+ "regex",
+ "semver",
+ "serde",
+ "serde_json",
+ "toml",
+ "ureq",
 ]
 
 [[package]]

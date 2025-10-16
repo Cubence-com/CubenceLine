@@ -99,7 +99,7 @@ impl ModelConfig {
 
         // Add comments and examples to the template
         let template_content = format!(
-            "# CCometixLine Model Configuration\n\
+            "# CubenceLine Model Configuration\n\
              # This file defines model display names and context limits for different LLM models\n\
              # File location: ~/.claude/ccline/models.toml\n\
              \n\
