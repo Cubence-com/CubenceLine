@@ -137,19 +137,19 @@ jobs:
       run: |
         # Prepare packages with version management
         node npm/scripts/prepare-packages.js
-        
-        # Copy binaries to platform directories
-        cp extracted/ccline-darwin-x64 npm-publish/darwin-x64/ccline
-        cp extracted/ccline-darwin-arm64 npm-publish/darwin-arm64/ccline
-        cp extracted/ccline-linux-x64 npm-publish/linux-x64/ccline
-        cp extracted/ccline-linux-x64-musl npm-publish/linux-x64-musl/ccline
-        cp extracted/ccline-win32-x64.exe npm-publish/win32-x64/ccline.exe
-        
+
+        # Copy binaries to platform directories (use new name: cubenceline)
+        cp extracted/ccline-darwin-x64 npm-publish/darwin-x64/cubenceline
+        cp extracted/ccline-darwin-arm64 npm-publish/darwin-arm64/cubenceline
+        cp extracted/ccline-linux-x64 npm-publish/linux-x64/cubenceline
+        cp extracted/ccline-linux-x64-musl npm-publish/linux-x64-musl/cubenceline
+        cp extracted/ccline-win32-x64.exe npm-publish/win32-x64/cubenceline.exe
+
         # Set executable permissions for Unix binaries
-        chmod +x npm-publish/darwin-x64/ccline
-        chmod +x npm-publish/darwin-arm64/ccline
-        chmod +x npm-publish/linux-x64/ccline
-        chmod +x npm-publish/linux-x64-musl/ccline
+        chmod +x npm-publish/darwin-x64/cubenceline
+        chmod +x npm-publish/darwin-arm64/cubenceline
+        chmod +x npm-publish/linux-x64/cubenceline
+        chmod +x npm-publish/linux-x64-musl/cubenceline
         
         # Verify packages
         echo "Package structure:"
