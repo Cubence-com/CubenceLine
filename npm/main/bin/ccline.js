@@ -4,12 +4,12 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 
-// 1. Priority: Use ~/.claude/ccline/ccline if exists
+// 1. Priority: Use ~/.claude/ccline/cubenceline if exists
 const claudePath = path.join(
   os.homedir(), 
   '.claude', 
   'ccline',
-  process.platform === 'win32' ? 'ccline.exe' : 'ccline'
+  process.platform === 'win32' ? 'cubenceline.exe' : 'cubenceline'
 );
 
 if (fs.existsSync(claudePath)) {
@@ -58,29 +58,29 @@ if (platform === 'linux') {
 }
 
 const packageMap = {
-  'darwin-x64': '@cometix/ccline-darwin-x64',
-  'darwin-arm64': '@cometix/ccline-darwin-arm64',
-  'linux-x64': '@cometix/ccline-linux-x64',
-  'linux-x64-musl': '@cometix/ccline-linux-x64-musl',
-  'win32-x64': '@cometix/ccline-win32-x64',
-  'win32-ia32': '@cometix/ccline-win32-x64', // Use 64-bit for 32-bit systems
+  'darwin-x64': '@cubence/cubenceline-darwin-x64',
+  'darwin-arm64': '@cubence/cubenceline-darwin-arm64',
+  'linux-x64': '@cubence/cubenceline-linux-x64',
+  'linux-x64-musl': '@cubence/cubenceline-linux-x64-musl',
+  'win32-x64': '@cubence/cubenceline-win32-x64',
+  'win32-ia32': '@cubence/cubenceline-win32-x64', // Use 64-bit for 32-bit systems
 };
 
 const packageName = packageMap[platformKey];
 if (!packageName) {
   console.error(`Error: Unsupported platform ${platformKey}`);
   console.error('Supported platforms: darwin (x64/arm64), linux (x64), win32 (x64)');
-  console.error('Please visit https://github.com/Haleclipse/CubenceLine for manual installation');
+  console.error('Please visit https://github.com/Cubence-com/CubenceLine.git for manual installation');
   process.exit(1);
 }
 
-const binaryName = platform === 'win32' ? 'ccline.exe' : 'ccline';
+const binaryName = platform === 'win32' ? 'cubenceline.exe' : 'cubenceline';
 const binaryPath = path.join(__dirname, '..', 'node_modules', packageName, binaryName);
 
 if (!fs.existsSync(binaryPath)) {
   console.error(`Error: Binary not found at ${binaryPath}`);
   console.error('This might indicate a failed installation or unsupported platform.');
-  console.error('Please try reinstalling: npm install -g @cometix/ccline');
+  console.error('Please try reinstalling: npm install -g @cubence/cubenceline');
   console.error(`Expected package: ${packageName}`);
   process.exit(1);
 }

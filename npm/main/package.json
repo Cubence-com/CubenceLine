@@ -1,23 +1,23 @@
 {
-  "name": "@cometix/ccline",
-  "version": "0.0.0",
+  "name": "@cubence/cubenceline",
+  "version": "1.0.1",
   "description": "CubenceLine - High-performance Claude Code StatusLine tool",
   "bin": {
-    "ccline": "./bin/ccline.js"
+    "cubenceline": "./bin/ccline.js"
   },
   "scripts": {
     "postinstall": "node scripts/postinstall.js"
   },
   "optionalDependencies": {
-    "@cometix/ccline-darwin-x64": "0.0.0",
-    "@cometix/ccline-darwin-arm64": "0.0.0",
-    "@cometix/ccline-linux-x64": "0.0.0",
-    "@cometix/ccline-linux-x64-musl": "0.0.0",
-    "@cometix/ccline-win32-x64": "0.0.0"
+    "@cubence/cubenceline-darwin-x64": "1.0.1",
+    "@cubence/cubenceline-darwin-arm64": "1.0.1",
+    "@cubence/cubenceline-linux-x64": "1.0.1",
+    "@cubence/cubenceline-linux-x64-musl": "1.0.1",
+    "@cubence/cubenceline-win32-x64": "1.0.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Haleclipse/CubenceLine"
+    "url": "https://github.com/Cubence-com/CubenceLine.git"
   },
   "keywords": ["claude", "statusline", "claude-code", "rust", "cli"],
   "author": "Haleclipse",

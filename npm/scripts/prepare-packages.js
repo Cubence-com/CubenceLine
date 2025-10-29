@@ -5,8 +5,8 @@ const path = require('path');
 const version = process.env.GITHUB_REF?.replace('refs/tags/v', '') || process.argv[2];
 if (!version) {
   console.error('Error: Version not provided');
-  console.error('Usage: GITHUB_REF=refs/tags/v1.0.0 node prepare-packages.js');
-  console.error('   or: node prepare-packages.js 1.0.0');
+  console.error('Usage: GITHUB_REF=refs/tags/v1.0.1 node prepare-packages.js');
+  console.error('   or: node prepare-packages.js 1.0.1');
   process.exit(1);
 }
 
@@ -42,7 +42,7 @@ platforms.forEach(platform => {
     JSON.stringify(packageJson, null, 2) + '\n'
   );
   
-  console.log(`✓ Prepared @cometix/ccline-${platform} v${version}`);
+  console.log(`✓ Prepared @cubence/cubenceline-${platform} v${version}`);
 });
 
 // Prepare main package
@@ -61,7 +61,7 @@ mainPackageJson.version = version;
 // Update optionalDependencies versions
 if (mainPackageJson.optionalDependencies) {
   Object.keys(mainPackageJson.optionalDependencies).forEach(dep => {
-    if (dep.startsWith('@cometix/ccline-')) {
+    if (dep.startsWith('@cubence/cubenceline-')) {
       mainPackageJson.optionalDependencies[dep] = version;
     }
   });
@@ -72,7 +72,7 @@ fs.writeFileSync(
   JSON.stringify(mainPackageJson, null, 2) + '\n'
 );
 
-console.log(`✓ Prepared @cometix/ccline v${version}`);
+console.log(`✓ Prepared @cubence/cubenceline v${version}`);
 console.log(`\n🎉 All packages prepared for version ${version}`);
 console.log('\nNext steps:');
 console.log('1. Copy binaries to platform directories');

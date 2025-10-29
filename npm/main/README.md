@@ -1,11 +1,11 @@
-# @cometix/ccline
+# @cubence/cubenceline
 
 CubenceLine - High-performance Claude Code StatusLine tool
 
 ## Installation
 
 ```bash
-npm install -g @cometix/ccline
+npm install -g @cubence/cubenceline
 ```
 
 ## Features
@@ -18,13 +18,13 @@ npm install -g @cometix/ccline
 
 ## Usage
 
-After installation, ccline is automatically configured for Claude Code at `~/.claude/ccline/ccline`.
+After installation, cubenceline is automatically configured for Claude Code at `~/.claude/ccline/cubenceline`.
 
 You can also use it directly:
 
 ```bash
-ccline --help
-ccline --version
+cubenceline --help
+cubenceline --version
 ```
 
 ## For Users in China
@@ -32,11 +32,11 @@ ccline --version
 Use npm mirror for faster installation:
 
 ```bash
-npm install -g @cometix/ccline --registry https://registry.npmmirror.com
+npm install -g @cubence/cubenceline --registry https://registry.npmmirror.com
 ```
 
 ## More Information
 
-- GitHub: https://github.com/Haleclipse/CubenceLine
-- Issues: https://github.com/Haleclipse/CubenceLine/issues
+- GitHub: https://github.com/Cubence-com/CubenceLine.git
+- Issues: https://github.com/Cubence-com/CubenceLine.git/issues
 - License: MIT

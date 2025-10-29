@@ -11,7 +11,8 @@ impl ConfigLoader {
 
     pub fn load_from_path<P: AsRef<Path>>(path: P) -> Result<Config, Box<dyn std::error::Error>> {
         let content = fs::read_to_string(path)?;
-        let config: Config = toml::from_str(&content)?;
+        let mut config: Config = toml::from_str(&content)?;
+        config.ensure_theme_segments();
         Ok(config)
     }
 
@@ -115,7 +116,8 @@ impl Config {
         }
 
         let content = fs::read_to_string(config_path)?;
-        let config: Config = toml::from_str(&content)?;
+        let mut config: Config = toml::from_str(&content)?;
+        config.ensure_theme_segments();
         Ok(config)
     }
 

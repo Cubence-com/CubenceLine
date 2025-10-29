@@ -32,6 +32,7 @@ impl SettingsComponent {
                 SegmentId::Git => "Git",
                 SegmentId::ContextWindow => "Context Window",
                 SegmentId::Usage => "Usage",
+                SegmentId::Cubence => "Cubence",
                 SegmentId::Cost => "Cost",
                 SegmentId::Session => "Session",
                 SegmentId::OutputStyle => "Output Style",

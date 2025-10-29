@@ -43,24 +43,24 @@ Install via npm (works on all platforms):
 
 ```bash
 # Install globally
-npm install -g @cometix/ccline
+npm install -g @cubence/cubenceline
 
 # Or using yarn
-yarn global add @cometix/ccline
+yarn global add @cubence/cubenceline
 
 # Or using pnpm
-pnpm add -g @cometix/ccline
+pnpm add -g @cubence/cubenceline
 ```
 
 Use npm mirror for faster download:
 ```bash
-npm install -g @cometix/ccline --registry https://registry.npmmirror.com
+npm install -g @cubence/cubenceline --registry https://registry.npmmirror.com
 ```
 
 After installation:
-- ✅ Global command `ccline` is available everywhere
+- ✅ Global command `cubenceline` is available everywhere
 - ⚙️ Follow the configuration steps below to integrate with Claude Code
-- 🎨 Run `ccline -c` to open configuration panel for theme selection
+- 🎨 Run `cubenceline -c` to open configuration panel for theme selection
 
 ### Claude Code Configuration
 
@@ -71,7 +71,7 @@ Add to your Claude Code `settings.json`:
 {
   "statusLine": {
     "type": "command", 
-    "command": "~/.claude/ccline/ccline",
+    "command": "~/.claude/ccline/cubenceline",
     "padding": 0
   }
 }
@@ -82,7 +82,7 @@ Add to your Claude Code `settings.json`:
 {
   "statusLine": {
     "type": "command", 
-    "command": "%USERPROFILE%\\.claude\\ccline\\ccline.exe",
+    "command": "%USERPROFILE%\\.claude\\ccline\\cubenceline.exe",
     "padding": 0
   }
 }
@@ -93,7 +93,7 @@ Add to your Claude Code `settings.json`:
 {
   "statusLine": {
     "type": "command", 
-    "command": "ccline",
+    "command": "cubenceline",
     "padding": 0
   }
 }
@@ -103,33 +103,33 @@ Add to your Claude Code `settings.json`:
 ### Update
 
 ```bash
-npm update -g @cometix/ccline
+npm update -g @cubence/cubenceline
 ```
 
 <details>
 <summary>Manual Installation (Click to expand)</summary>
 
-Alternatively, download from [Releases](https://github.com/Haleclipse/CubenceLine/releases):
+Alternatively, download from [Releases](https://github.com/Cubence-com/CubenceLine/releases):
 
 #### Linux
 
 #### Option 1: Dynamic Binary (Recommended)
 ```bash
 mkdir -p ~/.claude/ccline
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-linux-x64.tar.gz
-tar -xzf ccline-linux-x64.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-linux-x64.tar.gz
+tar -xzf cubenceline-linux-x64.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 *Requires: Ubuntu 22.04+, CentOS 9+, Debian 11+, RHEL 9+ (glibc 2.35+)*
 
 #### Option 2: Static Binary (Universal Compatibility)
 ```bash
 mkdir -p ~/.claude/ccline
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-linux-x64-static.tar.gz
-tar -xzf ccline-linux-x64-static.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-linux-x64-static.tar.gz
+tar -xzf cubenceline-linux-x64-static.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 *Works on any Linux distribution (static, no dependencies)*
 
@@ -137,20 +137,20 @@ chmod +x ~/.claude/ccline/ccline
 
 ```bash  
 mkdir -p ~/.claude/ccline
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-macos-x64.tar.gz
-tar -xzf ccline-macos-x64.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-macos-x64.tar.gz
+tar -xzf cubenceline-macos-x64.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 
 #### macOS (Apple Silicon)
 
 ```bash
 mkdir -p ~/.claude/ccline  
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-macos-arm64.tar.gz
-tar -xzf ccline-macos-arm64.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-macos-arm64.tar.gz
+tar -xzf cubenceline-macos-arm64.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 
 #### Windows
@@ -158,9 +158,9 @@ chmod +x ~/.claude/ccline/ccline
 ```powershell
 # Create directory and download
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\ccline"
-Invoke-WebRequest -Uri "https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-windows-x64.zip" -OutFile "ccline-windows-x64.zip"
-Expand-Archive -Path "ccline-windows-x64.zip" -DestinationPath "."
-Move-Item "ccline.exe" "$env:USERPROFILE\.claude\ccline\"
+Invoke-WebRequest -Uri "https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-windows-x64.zip" -OutFile "cubenceline-windows-x64.zip"
+Expand-Archive -Path "cubenceline-windows-x64.zip" -DestinationPath "."
+Move-Item "cubenceline.exe" "$env:USERPROFILE\.claude\ccline\"
 ```
 
 </details>
@@ -168,18 +168,18 @@ Move-Item "ccline.exe" "$env:USERPROFILE\.claude\ccline\"
 ### Build from Source
 
 ```bash
-git clone https://github.com/Haleclipse/CubenceLine.git
+git clone https://github.com/Cubence-com/CubenceLine.git
 cd CubenceLine
 cargo build --release
 
 # Linux/macOS
 mkdir -p ~/.claude/ccline
-cp target/release/cubenceline ~/.claude/ccline/ccline
-chmod +x ~/.claude/ccline/ccline
+cp target/release/cubenceline ~/.claude/ccline/cubenceline
+chmod +x ~/.claude/ccline/cubenceline
 
 # Windows (PowerShell)
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\ccline"
-copy target\release\cubenceline.exe "$env:USERPROFILE\.claude\ccline\ccline.exe"
+copy target\release\cubenceline.exe "$env:USERPROFILE\.claude\ccline\cubenceline.exe"
 ```
 
 ## Usage
@@ -188,40 +188,40 @@ copy target\release\cubenceline.exe "$env:USERPROFILE\.claude\ccline\ccline.exe"
 
 ```bash
 # Initialize configuration file
-ccline --init
+cubenceline --init
 
 # Check configuration validity  
-ccline --check
+cubenceline --check
 
 # Print current configuration
-ccline --print
+cubenceline --print
 
 # Enter TUI configuration mode
-ccline --config
+cubenceline --config
 ```
 
 ### Theme Override
 
 ```bash
 # Temporarily use specific theme (overrides config file)
-ccline --theme cometix
-ccline --theme minimal
-ccline --theme gruvbox
-ccline --theme nord
-ccline --theme powerline-dark
+cubenceline --theme cometix
+cubenceline --theme minimal
+cubenceline --theme gruvbox
+cubenceline --theme nord
+cubenceline --theme powerline-dark
 
 # Or use custom theme files from ~/.claude/ccline/themes/
-ccline --theme my-custom-theme
+cubenceline --theme my-custom-theme
 ```
 
 ### Claude Code Enhancement
 
 ```bash
 # Disable context warnings and enable verbose mode
-ccline --patch /path/to/claude-code/cli.js
+cubenceline --patch /path/to/claude-code/cli.js
 
 # Example for common installation
-ccline --patch ~/.local/share/fnm/node-versions/v24.4.1/installation/lib/node_modules/@anthropic-ai/claude-code/cli.js
+cubenceline --patch ~/.local/share/fnm/node-versions/v24.4.1/installation/lib/node_modules/@anthropic-ai/claude-code/cli.js
 ```
 
 ## Default Segments
@@ -249,9 +249,9 @@ Token usage percentage based on transcript analysis with context limit tracking.
 CubenceLine supports full configuration via TOML files and interactive TUI:
 
 - **Configuration file**: `~/.claude/ccline/config.toml`
-- **Interactive TUI**: `ccline --config` for real-time editing with preview
+- **Interactive TUI**: `cubenceline --config` for real-time editing with preview
 - **Theme files**: `~/.claude/ccline/themes/*.toml` for custom themes
-- **Automatic initialization**: `ccline --init` creates default configuration
+- **Automatic initialization**: `cubenceline --init` creates default configuration
 
 ### Available Segments
 
@@ -261,7 +261,15 @@ All segments are configurable with:
 - Color customization
 - Format options
 
-Supported segments: Directory, Git, Model, Usage, Time, Cost, OutputStyle
+Supported segments: Directory, Git, Model, ContextWindow, Usage, Subscription, Balance, Cost, Session, OutputStyle, Update
+
+#### Subscription & Balance segments
+
+- `subscription` shows remaining vs. limit for the 5-hour and weekly windows returned by `https://cubence.com/api/v1/user/subscription-info`.
+- `balance` surfaces the normal balance (`amount_dollar` / `amount_units`) from the same response.
+- Both segments reuse the Claude Code OAuth token that `cubenceline` already reads via Keychain/`~/.claude/.credentials.json`.
+- Configure `api_url`, `cache_duration` (seconds), and `timeout` (seconds) in the segment options if you need to point at a different endpoint or adjust refresh behaviour.
+- API values are expressed in "units" where `1_000_000 = $1`; both segments convert to dollars for the primary display.
 
 
 ## Requirements
@@ -307,4 +315,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Haleclipse/CubenceLine&type=Date)](https://star-history.com/#Haleclipse/CubenceLine&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Cubence-com/CubenceLine&type=Date)](https://star-history.com/#Cubence-com/CubenceLine&Date)

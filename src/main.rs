@@ -134,8 +134,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         #[cfg(not(feature = "tui"))]
         {
             eprintln!("No input data provided and TUI feature is not enabled.");
-            eprintln!("Usage: echo '{{...}}' | ccline");
-            eprintln!("   or: ccline --help");
+            eprintln!("Usage: echo '{{...}}' | cubenceline");
+            eprintln!("   or: cubenceline --help");
         }
         return Ok(());
     }

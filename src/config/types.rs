@@ -69,6 +69,7 @@ pub enum SegmentId {
     Git,
     ContextWindow,
     Usage,
+    Cubence,
     Cost,
     Session,
     OutputStyle,
@@ -236,6 +237,40 @@ impl NormalizedUsage {
 
         // Fallback to any available tokens
         self.input_tokens.max(self.output_tokens)
+    }
+}
+
+impl Config {
+    pub fn ensure_theme_segments(&mut self) {
+        let theme_preset = crate::ui::themes::ThemePresets::get_theme(&self.theme);
+
+        let mut existing: HashMap<SegmentId, SegmentConfig> = self
+            .segments
+            .drain(..)
+            .map(|segment| (segment.id, segment))
+            .collect();
+
+        let mut normalized = Vec::with_capacity(theme_preset.segments.len());
+
+        for preset_segment in theme_preset.segments {
+            if let Some(mut segment) = existing.remove(&preset_segment.id) {
+                // Backfill any missing options from preset defaults without overwriting user values
+                for (key, value) in preset_segment.options.iter() {
+                    segment
+                        .options
+                        .entry(key.clone())
+                        .or_insert_with(|| value.clone());
+                }
+                normalized.push(segment);
+            } else {
+                normalized.push(preset_segment);
+            }
+        }
+
+        // Preserve any custom segments the user may have added manually
+        normalized.extend(existing.into_values());
+
+        self.segments = normalized;
     }
 }
 

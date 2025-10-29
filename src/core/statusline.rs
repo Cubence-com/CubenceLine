@@ -489,6 +489,10 @@ pub fn collect_all_segments(
                 let segment = UsageSegment::new();
                 segment.collect(input)
             }
+            crate::config::SegmentId::Cubence => {
+                let segment = CubenceSegment::new();
+                segment.collect(input)
+            }
             crate::config::SegmentId::Cost => {
                 let segment = CostSegment::new();
                 segment.collect(input)

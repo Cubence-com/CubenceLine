@@ -246,3 +246,47 @@ pub fn usage_segment() -> SegmentConfig {
         },
     }
 }
+
+pub fn cubence_segment() -> SegmentConfig {
+    SegmentConfig {
+        id: SegmentId::Cubence,
+        enabled: true,
+        icon: IconConfig {
+            plain: "💎".to_string(),
+            nerd_font: "\u{f0c9a}".to_string(),
+        },
+        colors: ColorConfig {
+            icon: Some(AnsiColor::Rgb {
+                r: 46,
+                g: 52,
+                b: 64,
+            }),
+            text: Some(AnsiColor::Rgb {
+                r: 46,
+                g: 52,
+                b: 64,
+            }),
+            background: Some(AnsiColor::Rgb {
+                r: 163,
+                g: 190,
+                b: 140,
+            }),
+        },
+        styles: TextStyleConfig::default(),
+        options: {
+            let mut opts = HashMap::new();
+            opts.insert(
+                "api_url".to_string(),
+                serde_json::Value::String(
+                    "https://cubence.com/api/v1/user/subscription-info".to_string(),
+                ),
+            );
+            opts.insert(
+                "cache_duration".to_string(),
+                serde_json::Value::Number(180.into()),
+            );
+            opts.insert("timeout".to_string(), serde_json::Value::Number(2.into()));
+            opts
+        },
+    }
+}

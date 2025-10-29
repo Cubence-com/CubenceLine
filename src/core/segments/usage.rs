@@ -182,7 +182,19 @@ impl UsageSegment {
 
 impl Segment for UsageSegment {
     fn collect(&self, _input: &InputData) -> Option<SegmentData> {
-        let token = credentials::get_oauth_token()?;
+        let token = match credentials::get_oauth_token() {
+            Some(t) => t,
+            None => {
+                // No token found, return error segment
+                let mut metadata = HashMap::new();
+                metadata.insert("error".to_string(), "no_token".to_string());
+                return Some(SegmentData {
+                    primary: "No Token".to_string(),
+                    secondary: String::new(),
+                    metadata,
+                });
+            }
+        };
 
         // Load config from file to get segment options
         let config = crate::config::Config::load().ok()?;
@@ -233,14 +245,23 @@ impl Segment for UsageSegment {
                     )
                 }
                 None => {
+                    // API call failed
                     if let Some(cache) = cached_data {
+                        // Use stale cache with warning
                         (
                             cache.five_hour_utilization,
                             cache.seven_day_utilization,
                             cache.resets_at,
                         )
                     } else {
-                        return None;
+                        // No cache available, return error segment
+                        let mut metadata = HashMap::new();
+                        metadata.insert("error".to_string(), "api_error".to_string());
+                        return Some(SegmentData {
+                            primary: "API Error".to_string(),
+                            secondary: String::new(),
+                            metadata,
+                        });
                     }
                 }
             }

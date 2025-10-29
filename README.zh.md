@@ -43,24 +43,24 @@
 
 ```bash
 # 全局安装
-npm install -g @cometix/ccline
+npm install -g @cubence/cubenceline
 
 # 或使用 yarn
-yarn global add @cometix/ccline
+yarn global add @cubence/cubenceline
 
 # 或使用 pnpm
-pnpm add -g @cometix/ccline
+pnpm add -g @cubence/cubenceline
 ```
 
 使用镜像源加速下载：
 ```bash
-npm install -g @cometix/ccline --registry https://registry.npmmirror.com
+npm install -g @cubence/cubenceline --registry https://registry.npmmirror.com
 ```
 
 安装后：
-- ✅ 全局命令 `ccline` 可在任何地方使用
+- ✅ 全局命令 `cubenceline` 可在任何地方使用
 - ⚙️ 按照下方提示进行配置以集成到 Claude Code
-- 🎨 运行 `ccline -c` 打开配置面板进行主题选择
+- 🎨 运行 `cubenceline -c` 打开配置面板进行主题选择
 
 ### Claude Code 配置
 
@@ -71,7 +71,7 @@ npm install -g @cometix/ccline --registry https://registry.npmmirror.com
 {
   "statusLine": {
     "type": "command", 
-    "command": "~/.claude/ccline/ccline",
+    "command": "~/.claude/ccline/cubenceline",
     "padding": 0
   }
 }
@@ -82,7 +82,7 @@ npm install -g @cometix/ccline --registry https://registry.npmmirror.com
 {
   "statusLine": {
     "type": "command", 
-    "command": "%USERPROFILE%\\.claude\\ccline\\ccline.exe",
+    "command": "%USERPROFILE%\\.claude\\ccline\\cubenceline.exe",
     "padding": 0
   }
 }
@@ -93,7 +93,7 @@ npm install -g @cometix/ccline --registry https://registry.npmmirror.com
 {
   "statusLine": {
     "type": "command", 
-    "command": "ccline",
+    "command": "cubenceline",
     "padding": 0
   }
 }
@@ -103,33 +103,33 @@ npm install -g @cometix/ccline --registry https://registry.npmmirror.com
 ### 更新
 
 ```bash
-npm update -g @cometix/ccline
+npm update -g @cubence/cubenceline
 ```
 
 <details>
 <summary>手动安装（点击展开）</summary>
 
-或者从 [Releases](https://github.com/Haleclipse/CubenceLine/releases) 手动下载：
+或者从 [Releases](https://github.com/Cubence-com/CubenceLine/releases) 手动下载：
 
 #### Linux
 
 #### 选项 1: 动态链接版本（推荐）
 ```bash
 mkdir -p ~/.claude/ccline
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-linux-x64.tar.gz
-tar -xzf ccline-linux-x64.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-linux-x64.tar.gz
+tar -xzf cubenceline-linux-x64.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 *系统要求: Ubuntu 22.04+, CentOS 9+, Debian 11+, RHEL 9+ (glibc 2.35+)*
 
 #### 选项 2: 静态链接版本（通用兼容）
 ```bash
 mkdir -p ~/.claude/ccline
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-linux-x64-static.tar.gz
-tar -xzf ccline-linux-x64-static.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-linux-x64-static.tar.gz
+tar -xzf cubenceline-linux-x64-static.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 *适用于任何 Linux 发行版（静态链接，无依赖）*
 
@@ -137,20 +137,20 @@ chmod +x ~/.claude/ccline/ccline
 
 ```bash  
 mkdir -p ~/.claude/ccline
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-macos-x64.tar.gz
-tar -xzf ccline-macos-x64.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-macos-x64.tar.gz
+tar -xzf cubenceline-macos-x64.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 
 #### macOS (Apple Silicon)
 
 ```bash
 mkdir -p ~/.claude/ccline  
-wget https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-macos-arm64.tar.gz
-tar -xzf ccline-macos-arm64.tar.gz
-cp ccline ~/.claude/ccline/
-chmod +x ~/.claude/ccline/ccline
+wget https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-macos-arm64.tar.gz
+tar -xzf cubenceline-macos-arm64.tar.gz
+cp cubenceline ~/.claude/ccline/
+chmod +x ~/.claude/ccline/cubenceline
 ```
 
 #### Windows
@@ -158,9 +158,9 @@ chmod +x ~/.claude/ccline/ccline
 ```powershell
 # 创建目录并下载
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\ccline"
-Invoke-WebRequest -Uri "https://github.com/Haleclipse/CubenceLine/releases/latest/download/ccline-windows-x64.zip" -OutFile "ccline-windows-x64.zip"
-Expand-Archive -Path "ccline-windows-x64.zip" -DestinationPath "."
-Move-Item "ccline.exe" "$env:USERPROFILE\.claude\ccline\"
+Invoke-WebRequest -Uri "https://github.com/Cubence-com/CubenceLine/releases/latest/download/cubenceline-windows-x64.zip" -OutFile "cubenceline-windows-x64.zip"
+Expand-Archive -Path "cubenceline-windows-x64.zip" -DestinationPath "."
+Move-Item "cubenceline.exe" "$env:USERPROFILE\.claude\ccline\"
 ```
 
 </details>
@@ -168,10 +168,10 @@ Move-Item "ccline.exe" "$env:USERPROFILE\.claude\ccline\"
 ### 从源码构建
 
 ```bash
-git clone https://github.com/Haleclipse/CubenceLine.git
+git clone https://github.com/Cubence-com/CubenceLine.git
 cd CubenceLine
 cargo build --release
-cp target/release/cubenceline ~/.claude/ccline/ccline
+cp target/release/cubenceline ~/.claude/ccline/cubenceline
 ```
 
 ## 使用
@@ -180,40 +180,40 @@ cp target/release/cubenceline ~/.claude/ccline/ccline
 
 ```bash
 # 初始化配置文件
-ccline --init
+cubenceline --init
 
 # 检查配置有效性  
-ccline --check
+cubenceline --check
 
 # 打印当前配置
-ccline --print
+cubenceline --print
 
 # 进入 TUI 配置模式
-ccline --config
+cubenceline --config
 ```
 
 ### 主题覆盖
 
 ```bash
 # 临时使用指定主题（覆盖配置文件设置）
-ccline --theme cometix
-ccline --theme minimal
-ccline --theme gruvbox
-ccline --theme nord
-ccline --theme powerline-dark
+cubenceline --theme cometix
+cubenceline --theme minimal
+cubenceline --theme gruvbox
+cubenceline --theme nord
+cubenceline --theme powerline-dark
 
 # 或使用 ~/.claude/ccline/themes/ 目录下的自定义主题
-ccline --theme my-custom-theme
+cubenceline --theme my-custom-theme
 ```
 
 ### Claude Code 增强
 
 ```bash
 # 禁用上下文警告并启用详细模式
-ccline --patch /path/to/claude-code/cli.js
+cubenceline --patch /path/to/claude-code/cli.js
 
 # 常见安装路径示例
-ccline --patch ~/.local/share/fnm/node-versions/v24.4.1/installation/lib/node_modules/@anthropic-ai/claude-code/cli.js
+cubenceline --patch ~/.local/share/fnm/node-versions/v24.4.1/installation/lib/node_modules/@anthropic-ai/claude-code/cli.js
 ```
 
 ## 默认段落
@@ -241,9 +241,9 @@ ccline --patch ~/.local/share/fnm/node-versions/v24.4.1/installation/lib/node_mo
 CubenceLine 支持通过 TOML 文件和交互式 TUI 进行完整配置：
 
 - **配置文件**: `~/.claude/ccline/config.toml`
-- **交互式 TUI**: `ccline --config` 实时编辑配置并预览效果
+- **交互式 TUI**: `cubenceline --config` 实时编辑配置并预览效果
 - **主题文件**: `~/.claude/ccline/themes/*.toml` 自定义主题文件
-- **自动初始化**: `ccline --init` 创建默认配置
+- **自动初始化**: `cubenceline --init` 创建默认配置
 
 ### 可用段落
 
@@ -253,7 +253,15 @@ CubenceLine 支持通过 TOML 文件和交互式 TUI 进行完整配置：
 - 颜色自定义
 - 格式选项
 
-支持的段落：目录、Git、模型、使用量、时间、成本、输出样式
+支持的段落：目录、Git、模型、上下文窗口、使用量、订阅额度、余额、成本、会话、输出样式、更新
+
+#### 订阅额度与余额段
+
+- `subscription` 展示 `https://cubence.com/api/v1/user/subscription-info` 接口返回的 5 小时/周订阅窗口剩余额度与上限。
+- `balance` 显示 normal_balance 信息（`amount_dollar` / `amount_units`）。
+- 两个段都会重用 Claude Code 的 OAuth token，cubenceline 会自动从系统钥匙串或 `~/.claude/.credentials.json` 读取。
+- 如需自定义接口或刷新策略，可在段落选项里配置 `api_url`、`cache_duration`（秒）和 `timeout`（秒）。
+- 接口额度单位为 1,000,000 = 1 美元，段落会将主要数值换算成美元呈现。
 
 
 ## 系统要求
@@ -296,4 +304,4 @@ cargo build --release
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Haleclipse/CubenceLine&type=Date)](https://star-history.com/#Haleclipse/CubenceLine&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Cubence-com/CubenceLine&type=Date)](https://star-history.com/#Cubence-com/CubenceLine&Date)

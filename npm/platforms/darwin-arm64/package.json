@@ -1,13 +1,13 @@
 {
-  "name": "@cometix/ccline-darwin-arm64",
-  "version": "0.0.0",
+  "name": "@cubence/cubenceline-darwin-arm64",
+  "version": "1.0.1",
   "description": "macOS ARM64 binary for CubenceLine",
-  "files": ["ccline"],
+  "files": ["cubenceline"],
   "os": ["darwin"],
   "cpu": ["arm64"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Haleclipse/CubenceLine"
+    "url": "https://github.com/Cubence-com/CubenceLine.git"
   },
   "author": "Haleclipse",
   "license": "MIT"
