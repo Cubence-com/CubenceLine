@@ -6,3 +6,8 @@ CLAUDE.md
 PRD.md
 .claude/
 tests/
+
+# npm platform binaries (build artifacts)
+npm/platforms/*/cubenceline
+npm/platforms/*/cubenceline.exe
+npm-publish/

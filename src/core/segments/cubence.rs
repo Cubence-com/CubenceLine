@@ -13,11 +13,9 @@ impl CubenceSegment {
 
     fn get_options() -> (String, u64, u64) {
         let config = crate::config::Config::load().ok();
-        let segment_config = config.as_ref().and_then(|cfg| {
-            cfg.segments
-                .iter()
-                .find(|s| s.id == SegmentId::Cubence)
-        });
+        let segment_config = config
+            .as_ref()
+            .and_then(|cfg| cfg.segments.iter().find(|s| s.id == SegmentId::Cubence));
 
         let api_url = segment_config
             .and_then(|sc| sc.options.get("api_url"))
@@ -118,8 +116,14 @@ impl Segment for CubenceSegment {
         let mut metadata = HashMap::new();
 
         // Balance metadata
-        metadata.insert("balance_dollars".to_string(), format!("{:.6}", balance.amount_dollar));
-        metadata.insert("balance_units".to_string(), balance.amount_units.to_string());
+        metadata.insert(
+            "balance_dollars".to_string(),
+            format!("{:.6}", balance.amount_dollar),
+        );
+        metadata.insert(
+            "balance_units".to_string(),
+            balance.amount_units.to_string(),
+        );
 
         // Subscription metadata
         metadata.insert("has_subscription".to_string(), has_subscription.to_string());

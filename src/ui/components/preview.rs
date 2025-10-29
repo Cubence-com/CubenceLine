@@ -142,7 +142,9 @@ impl PreviewComponent {
                     metadata: HashMap::new(),
                 },
                 SegmentId::Cubence => SegmentData {
-                    primary: "Cubence - 订阅[5h $12.34/$120.00 | week $12.34/$500.00]  余额[$899.00]".to_string(),
+                    primary:
+                        "Cubence - 订阅[5h $12.34/$120.00 | week $12.34/$500.00]  余额[$899.00]"
+                            .to_string(),
                     secondary: String::new(),
                     metadata: HashMap::new(),
                 },
