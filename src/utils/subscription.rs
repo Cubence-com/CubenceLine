@@ -58,8 +58,9 @@ impl SubscriptionApiClient {
         Self::DEFAULT_URL
     }
 
-    pub fn fetch(api_url: &str, timeout_secs: u64) -> Option<SubscriptionInfo> {
-        let token = credentials::get_oauth_token()?;
+    pub fn fetch(api_url: &str, timeout_secs: u64) -> Result<SubscriptionInfo, String> {
+        let token = credentials::get_oauth_token()
+            .ok_or_else(|| "Failed to get OAuth token".to_string())?;
 
         let agent = ureq::AgentBuilder::new()
             .timeout(Duration::from_secs(timeout_secs))
@@ -72,24 +73,26 @@ impl SubscriptionApiClient {
             .set("Authorization", &format!("Bearer {}", token))
             .set("Content-Type", "application/json")
             .call()
-            .ok()?;
+            .map_err(|e| format!("API request failed: {}", e))?;
 
         if response.status() != 200 {
-            return None;
+            return Err(format!("API returned status code: {}", response.status()));
         }
 
-        response.into_json().ok()
+        response
+            .into_json()
+            .map_err(|e| format!("Failed to parse response: {}", e))
     }
 
     pub fn get_with_cache(
         api_url: &str,
         timeout_secs: u64,
         cache_duration_secs: u64,
-    ) -> Option<SubscriptionInfo> {
+    ) -> Result<SubscriptionInfo, String> {
         // Try memory/disk cache first
         if let Some(cache) = Self::load_cache() {
             if Self::is_cache_valid(&cache, cache_duration_secs) {
-                return Some(cache.info);
+                return Ok(cache.info);
             }
         }
 
@@ -101,7 +104,7 @@ impl SubscriptionApiClient {
         };
         Self::save_cache(&cache);
 
-        Some(info)
+        Ok(info)
     }
 
     pub fn format_reset_time(reset_at: Option<i64>) -> Option<String> {

@@ -74,13 +74,14 @@ impl Segment for CubenceSegment {
         let (api_url, cache_duration, timeout) = Self::get_options();
 
         let info = match SubscriptionApiClient::get_with_cache(&api_url, timeout, cache_duration) {
-            Some(info) => info,
-            None => {
-                // Failed to get cubence info, return error segment
+            Ok(info) => info,
+            Err(error_msg) => {
+                // Failed to get cubence info, return error segment with detailed error message
                 let mut metadata = HashMap::new();
                 metadata.insert("error".to_string(), "fetch_failed".to_string());
+                metadata.insert("error_message".to_string(), error_msg.clone());
                 return Some(SegmentData {
-                    primary: "Cubence - API Error".to_string(),
+                    primary: format!("Cubence - API Error: {}", error_msg),
                     secondary: String::new(),
                     metadata,
                 });
