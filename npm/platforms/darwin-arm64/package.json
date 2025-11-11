@@ -1,6 +1,6 @@
 {
   "name": "@cubence/cubenceline-darwin-arm64",
-  "version": "1.0.1",
+  "version": "1.1.4",
   "description": "macOS ARM64 binary for CubenceLine",
   "files": ["cubenceline"],
   "os": ["darwin"],

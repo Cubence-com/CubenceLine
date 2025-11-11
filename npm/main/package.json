@@ -1,6 +1,6 @@
 {
   "name": "@cubence/cubenceline",
-  "version": "1.0.1",
+  "version": "1.1.4",
   "description": "CubenceLine - High-performance Claude Code StatusLine tool",
   "bin": {
     "cubenceline": "./bin/ccline.js"
@@ -9,11 +9,11 @@
     "postinstall": "node scripts/postinstall.js"
   },
   "optionalDependencies": {
-    "@cubence/cubenceline-darwin-x64": "1.0.1",
-    "@cubence/cubenceline-darwin-arm64": "1.0.1",
-    "@cubence/cubenceline-linux-x64": "1.0.1",
-    "@cubence/cubenceline-linux-x64-musl": "1.0.1",
-    "@cubence/cubenceline-win32-x64": "1.0.1"
+    "@cubence/cubenceline-darwin-x64": "1.1.4",
+    "@cubence/cubenceline-darwin-arm64": "1.1.4",
+    "@cubence/cubenceline-linux-x64": "1.1.4",
+    "@cubence/cubenceline-linux-x64-musl": "1.1.4",
+    "@cubence/cubenceline-win32-x64": "1.1.4"
   },
   "repository": {
     "type": "git",

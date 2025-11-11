@@ -51,11 +51,22 @@ struct SubscriptionInfoCache {
 pub struct SubscriptionApiClient;
 
 impl SubscriptionApiClient {
-    const DEFAULT_URL: &'static str = "https://cubence.com/api/v1/user/subscription-info";
+    const DEFAULT_BASE_URL: &'static str = "https://cubence.com/api";
+    const SUBSCRIPTION_PATH: &'static str = "/v1/user/subscription-info";
     const CACHE_FILE: &'static str = ".subscription_info_cache.json";
 
-    pub fn default_url() -> &'static str {
-        Self::DEFAULT_URL
+    pub fn default_url() -> String {
+        let base_url = credentials::get_anthropic_base_url()
+            .unwrap_or_else(|| Self::DEFAULT_BASE_URL.to_string());
+        Self::build_subscription_url(&base_url)
+    }
+
+    fn build_subscription_url(base_url: &str) -> String {
+        format!(
+            "{}{}",
+            base_url.trim_end_matches('/'),
+            Self::SUBSCRIPTION_PATH
+        )
     }
 
     pub fn fetch(api_url: &str, timeout_secs: u64) -> Result<SubscriptionInfo, String> {

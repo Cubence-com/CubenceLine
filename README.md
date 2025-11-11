@@ -265,7 +265,7 @@ Supported segments: Directory, Git, Model, ContextWindow, Usage, Subscription, B
 
 #### Subscription & Balance segments
 
-- `subscription` shows remaining vs. limit for the 5-hour and weekly windows returned by `https://cubence.com/api/v1/user/subscription-info`.
+- `subscription` shows remaining vs. limit for the 5-hour and weekly windows returned by `{ANTHROPIC_BASE_URL}/v1/user/subscription-info` (the `ANTHROPIC_BASE_URL` value is read from `~/.claude/settings.json` → `env.ANTHROPIC_BASE_URL`, just like `ANTHROPIC_AUTH_TOKEN`).
 - `balance` surfaces the normal balance (`amount_dollar` / `amount_units`) from the same response.
 - Both segments reuse the Claude Code OAuth token that `cubenceline` already reads via Keychain/`~/.claude/.credentials.json`.
 - Configure `api_url`, `cache_duration` (seconds), and `timeout` (seconds) in the segment options if you need to point at a different endpoint or adjust refresh behaviour.

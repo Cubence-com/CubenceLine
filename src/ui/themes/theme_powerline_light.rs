@@ -1,6 +1,7 @@
 use crate::config::{
     AnsiColor, ColorConfig, IconConfig, SegmentConfig, SegmentId, TextStyleConfig,
 };
+use crate::utils::subscription::SubscriptionApiClient;
 use std::collections::HashMap;
 
 pub fn model_segment() -> SegmentConfig {
@@ -269,9 +270,7 @@ pub fn cubence_segment() -> SegmentConfig {
             let mut opts = HashMap::new();
             opts.insert(
                 "api_url".to_string(),
-                serde_json::Value::String(
-                    "https://cubence.com/api/v1/user/subscription-info".to_string(),
-                ),
+                serde_json::Value::String(SubscriptionApiClient::default_url()),
             );
             opts.insert(
                 "cache_duration".to_string(),

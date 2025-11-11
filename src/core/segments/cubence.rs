@@ -20,8 +20,8 @@ impl CubenceSegment {
         let api_url = segment_config
             .and_then(|sc| sc.options.get("api_url"))
             .and_then(|v| v.as_str())
-            .unwrap_or(SubscriptionApiClient::default_url())
-            .to_string();
+            .map(|url| url.to_string())
+            .unwrap_or_else(|| SubscriptionApiClient::default_url());
 
         let cache_duration = segment_config
             .and_then(|sc| sc.options.get("cache_duration"))

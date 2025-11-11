@@ -257,7 +257,7 @@ CubenceLine 支持通过 TOML 文件和交互式 TUI 进行完整配置：
 
 #### 订阅额度与余额段
 
-- `subscription` 展示 `https://cubence.com/api/v1/user/subscription-info` 接口返回的 5 小时/周订阅窗口剩余额度与上限。
+- `subscription` 展示 `{ANTHROPIC_BASE_URL}/v1/user/subscription-info` 接口返回的 5 小时/周订阅窗口剩余额度与上限（`ANTHROPIC_BASE_URL` 与 `ANTHROPIC_AUTH_TOKEN` 一样，从 `~/.claude/settings.json` 的 `env.ANTHROPIC_BASE_URL` 读取）。
 - `balance` 显示 normal_balance 信息（`amount_dollar` / `amount_units`）。
 - 两个段都会重用 Claude Code 的 OAuth token，cubenceline 会自动从系统钥匙串或 `~/.claude/.credentials.json` 读取。
 - 如需自定义接口或刷新策略，可在段落选项里配置 `api_url`、`cache_duration`（秒）和 `timeout`（秒）。
