@@ -1,6 +1,6 @@
 {
   "name": "@cubence/cubenceline-linux-x64-musl",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Linux x64 static binary for CubenceLine (musl libc)",
   "files": ["cubenceline"],
   "os": ["linux"],
