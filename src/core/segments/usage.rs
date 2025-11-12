@@ -126,21 +126,29 @@ impl UsageSegment {
     }
 
     fn get_proxy_from_settings() -> Option<String> {
-        let home = std::env::var("HOME")
-            .or_else(|_| std::env::var("USERPROFILE"))
-            .ok()?;
-        let settings_path = format!("{}/.claude/settings.json", home);
+        // First try to read from Claude settings file
+        if let Ok(home) = std::env::var("HOME").or_else(|_| std::env::var("USERPROFILE")) {
+            let settings_path = format!("{}/.claude/settings.json", home);
+            if let Ok(content) = std::fs::read_to_string(&settings_path) {
+                if let Ok(settings) = serde_json::from_str::<serde_json::Value>(&content) {
+                    // Try HTTPS_PROXY first, then HTTP_PROXY from settings file
+                    if let Some(proxy) = settings
+                        .get("env")
+                        .and_then(|env| env.get("HTTPS_PROXY"))
+                        .or_else(|| settings.get("env").and_then(|env| env.get("HTTP_PROXY")))
+                        .and_then(|v| v.as_str())
+                        .map(|s| s.to_string())
+                    {
+                        return Some(proxy);
+                    }
+                }
+            }
+        }
 
-        let content = std::fs::read_to_string(&settings_path).ok()?;
-        let settings: serde_json::Value = serde_json::from_str(&content).ok()?;
-
-        // Try HTTPS_PROXY first, then HTTP_PROXY
-        settings
-            .get("env")?
-            .get("HTTPS_PROXY")
-            .or_else(|| settings.get("env")?.get("HTTP_PROXY"))
-            .and_then(|v| v.as_str())
-            .map(|s| s.to_string())
+        // Fallback to environment variables if not found in settings file
+        std::env::var("HTTPS_PROXY")
+            .or_else(|_| std::env::var("HTTP_PROXY"))
+            .ok()
     }
 
     fn fetch_api_usage(
@@ -200,10 +208,11 @@ impl Segment for UsageSegment {
         let config = crate::config::Config::load().ok()?;
         let segment_config = config.segments.iter().find(|s| s.id == SegmentId::Usage);
 
-        let api_base_url = segment_config
-            .and_then(|sc| sc.options.get("api_base_url"))
-            .and_then(|v| v.as_str())
-            .unwrap_or("https://api.anthropic.com");
+        // Always use the base URL from settings.json (ANTHROPIC_BASE_URL)
+        let api_base_url = crate::utils::credentials::get_anthropic_base_url()
+            .unwrap_or_else(|| "https://api.anthropic.com".to_string());
+        // Remove trailing slash if present
+        let api_base_url = api_base_url.trim_end_matches('/');
 
         let cache_duration = segment_config
             .and_then(|sc| sc.options.get("cache_duration"))

@@ -1,6 +1,9 @@
 use super::{Segment, SegmentData};
 use crate::config::{InputData, SegmentId};
-use crate::utils::subscription::{SubscriptionApiClient, WindowInfo};
+use crate::utils::{
+    credentials,
+    subscription::{SubscriptionApiClient, WindowInfo},
+};
 use std::collections::HashMap;
 
 #[derive(Default)]
@@ -17,11 +20,8 @@ impl CubenceSegment {
             .as_ref()
             .and_then(|cfg| cfg.segments.iter().find(|s| s.id == SegmentId::Cubence));
 
-        let api_url = segment_config
-            .and_then(|sc| sc.options.get("api_url"))
-            .and_then(|v| v.as_str())
-            .map(|url| url.to_string())
-            .unwrap_or_else(|| SubscriptionApiClient::default_url());
+        // Always use the URL from settings.json (ANTHROPIC_BASE_URL)
+        let api_url = SubscriptionApiClient::default_url();
 
         let cache_duration = segment_config
             .and_then(|sc| sc.options.get("cache_duration"))
@@ -95,7 +95,7 @@ impl Segment for CubenceSegment {
         // Check if has subscription (limit > 0)
         let has_subscription = five_hour.limit > 0 || weekly.limit > 0;
 
-        let primary = if has_subscription {
+        let mut primary = if has_subscription {
             // Format: Cubence - 订阅[5h $used/$limit | week $used/$limit]  余额[$balance]
             let five_used = SubscriptionApiClient::format_units_to_dollars(five_hour.used);
             let five_limit = SubscriptionApiClient::format_units_to_dollars(five_hour.limit);
@@ -110,6 +110,18 @@ impl Segment for CubenceSegment {
             // Format: Cubence - 余额[$balance]
             format!("Cubence - 余额[${:.2}]", balance.amount_dollar)
         };
+
+        // Check health endpoint latency
+        let base_url = credentials::get_anthropic_base_url()
+            .unwrap_or_else(|| "https://cubence.com/api".to_string());
+
+        let latency_result = SubscriptionApiClient::check_health_latency(&base_url, timeout);
+        let latency_str = match &latency_result {
+            Ok(latency_ms) => format!(" 延迟[{}ms]", latency_ms),
+            Err(_) => " 延迟[timeout]".to_string(),
+        };
+
+        primary.push_str(&latency_str);
 
         let secondary = String::new();
 
@@ -140,6 +152,11 @@ impl Segment for CubenceSegment {
         let weekly_meta = Self::format_window_for_metadata(weekly);
         for (k, v) in weekly_meta {
             metadata.insert(format!("weekly_{}", k), v);
+        }
+
+        // Add latency to metadata
+        if let Ok(latency_ms) = latency_result {
+            metadata.insert("latency_ms".to_string(), latency_ms.to_string());
         }
 
         Some(SegmentData {

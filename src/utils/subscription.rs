@@ -53,7 +53,34 @@ pub struct SubscriptionApiClient;
 impl SubscriptionApiClient {
     const DEFAULT_BASE_URL: &'static str = "https://cubence.com/api";
     const SUBSCRIPTION_PATH: &'static str = "/v1/user/subscription-info";
+    const HEALTH_PATH: &'static str = "/health";
     const CACHE_FILE: &'static str = ".subscription_info_cache.json";
+
+    fn get_proxy_from_settings() -> Option<String> {
+        // First try to read from Claude settings file
+        if let Ok(home) = std::env::var("HOME").or_else(|_| std::env::var("USERPROFILE")) {
+            let settings_path = format!("{}/.claude/settings.json", home);
+            if let Ok(content) = std::fs::read_to_string(&settings_path) {
+                if let Ok(settings) = serde_json::from_str::<serde_json::Value>(&content) {
+                    // Try HTTPS_PROXY first, then HTTP_PROXY from settings file
+                    if let Some(proxy) = settings
+                        .get("env")
+                        .and_then(|env| env.get("HTTPS_PROXY"))
+                        .or_else(|| settings.get("env").and_then(|env| env.get("HTTP_PROXY")))
+                        .and_then(|v| v.as_str())
+                        .map(|s| s.to_string())
+                    {
+                        return Some(proxy);
+                    }
+                }
+            }
+        }
+
+        // Fallback to environment variables if not found in settings file
+        std::env::var("HTTPS_PROXY")
+            .or_else(|_| std::env::var("HTTP_PROXY"))
+            .ok()
+    }
 
     pub fn default_url() -> String {
         let base_url = credentials::get_anthropic_base_url()
@@ -73,11 +100,19 @@ impl SubscriptionApiClient {
         let token = credentials::get_oauth_token()
             .ok_or_else(|| "Failed to get OAuth token".to_string())?;
 
-        let agent = ureq::AgentBuilder::new()
+        let mut agent_builder = ureq::AgentBuilder::new()
             .timeout(Duration::from_secs(timeout_secs))
             .timeout_read(Duration::from_secs(timeout_secs))
-            .timeout_write(Duration::from_secs(timeout_secs))
-            .build();
+            .timeout_write(Duration::from_secs(timeout_secs));
+
+        // Configure proxy from Claude settings if available
+        if let Some(proxy_url) = Self::get_proxy_from_settings() {
+            if let Ok(proxy) = ureq::Proxy::new(&proxy_url) {
+                agent_builder = agent_builder.proxy(proxy);
+            }
+        }
+
+        let agent = agent_builder.build();
 
         let response = agent
             .get(api_url)
@@ -167,5 +202,41 @@ impl SubscriptionApiClient {
         } else {
             false
         }
+    }
+
+    /// Check health endpoint and return latency in milliseconds
+    pub fn check_health_latency(base_url: &str, timeout_secs: u64) -> Result<u64, String> {
+        let health_url = format!("{}{}", base_url.trim_end_matches('/'), Self::HEALTH_PATH);
+
+        let mut agent_builder = ureq::AgentBuilder::new()
+            .timeout(Duration::from_secs(timeout_secs))
+            .timeout_read(Duration::from_secs(timeout_secs))
+            .timeout_write(Duration::from_secs(timeout_secs));
+
+        // Configure proxy from Claude settings if available
+        if let Some(proxy_url) = Self::get_proxy_from_settings() {
+            if let Ok(proxy) = ureq::Proxy::new(&proxy_url) {
+                agent_builder = agent_builder.proxy(proxy);
+            }
+        }
+
+        let agent = agent_builder.build();
+
+        // Measure request latency
+        let start = std::time::Instant::now();
+        let response = agent
+            .get(&health_url)
+            .call()
+            .map_err(|e| format!("Health check failed: {}", e))?;
+        let latency = start.elapsed();
+
+        if response.status() != 200 {
+            return Err(format!(
+                "Health check returned status: {}",
+                response.status()
+            ));
+        }
+
+        Ok(latency.as_millis() as u64)
     }
 }
